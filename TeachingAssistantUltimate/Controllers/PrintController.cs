@@ -2,39 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
+using System.Threading.Tasks;
 
 namespace TeachingAssistant.Controllers
 {
     public class PdfController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
             if (HybridSupport.IsElectronActive)
             {
-                Electron.IpcMain.On("print-pdf", async (args) =>
-                {
-                    BrowserWindow mainWindow = Electron.WindowManager.BrowserWindows.First();
-
-                    var saveOptions = new SaveDialogOptions
-                    {
-                        Title = "Save an PDF-File",
-                        DefaultPath = await Electron.App.GetPathAsync(PathName.documents),
-                        Filters = new FileFilter[]
-                        {
-                        new FileFilter { Name = "PDF", Extensions = new string[] { "pdf" } }
-                        }
-                    };
-                    var path = await Electron.Dialog.ShowSaveDialogAsync(mainWindow, saveOptions);
-
-                    if (await mainWindow.WebContents.PrintToPDFAsync(path))
-                    {
-                        await Electron.Shell.OpenExternalAsync("file://" + path);
-                    }
-                    else
-                    {
-                        Electron.Dialog.ShowErrorBox("Error", "Failed to create pdf file.");
-                    }
-                });
+                var window = await Electron.WindowManager.CreateWindowAsync(loadUrl: "http://localhost:80");
             }
 
             return Ok(new { Message = "Document was saved to selected location" });

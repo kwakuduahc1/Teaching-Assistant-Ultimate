@@ -6,7 +6,33 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="ClientApp\dist\jquery.js" />
+    <None Remove="ClientApp\dist\jquery.min.js" />
+    <None Remove="ClientApp\dist\jquery.min.map" />
+    <None Remove="ClientApp\dist\jquery.slim.js" />
+    <None Remove="ClientApp\dist\jquery.slim.min.js" />
+    <None Remove="ClientApp\dist\jquery.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ClientApp\app\Editor\quill\node_modules\eventemitter3\package.json" />
+    <Content Include="ClientApp\dist\jquery.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\dist\jquery.min.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\dist\jquery.min.map">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\dist\jquery.slim.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\dist\jquery.slim.min.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\dist\jquery.slim.min.map">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ElectronNET.API" Version="0.0.9" />

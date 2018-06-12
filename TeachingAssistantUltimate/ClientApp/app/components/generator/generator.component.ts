@@ -19,7 +19,7 @@ export class GeneratorComponent {
     max: number = 1;
     questions: IQuestions[] = [];
     usid: number = 0;
-    constructor(route: ActivatedRoute, private http: HttpProvider, private printer:PrintProviderService) {
+    constructor(route: ActivatedRoute, private http: HttpProvider, private printer: PrintProviderService) {
         this.topics = route.snapshot.data["topics"] as ITopics[];
         this.subject = route.snapshot.data["subject"] as ISubjects;
         this.max = this.topics.length * 4;
@@ -43,6 +43,6 @@ export class GeneratorComponent {
     }
 
     print(): void {
-        this.printer.print('print');
+        this.printer.print("");
     }
 }

@@ -1,5 +1,5 @@
 ﻿import { Injectable } from "@angular/core";
-import * as jquery from 'jquery'
+declare var jquery: any;
 declare var $: any;
 
 @Injectable()

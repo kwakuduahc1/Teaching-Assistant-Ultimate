@@ -41,6 +41,10 @@ export class HttpProvider {
     getTopics(id: number): Observable<ITopics[]> {
         return this.http.get<ITopics[]>(`/Questions/Topics/${id}`);
     }
+
+    print() {
+        return this.http.get('/Print/Index');
+    }
     constructor(private http: HttpClient) {
 
     }
