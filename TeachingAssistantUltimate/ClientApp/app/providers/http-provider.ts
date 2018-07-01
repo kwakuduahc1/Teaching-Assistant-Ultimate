@@ -42,9 +42,10 @@ export class HttpProvider {
         return this.http.get<ITopics[]>(`/Questions/Topics/${id}`);
     }
 
-    print() {
-        return this.http.get('/Print/Index');
+    print(id:number) {
+        return this.http.get(`/Print/Index?id=${id}`);
     }
+
     constructor(private http: HttpClient) {
 
     }

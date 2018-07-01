@@ -5,7 +5,8 @@ declare var $: any;
 @Injectable()
 export class PrintProviderService {
 
-    print(title?: string, header?: string, foot?: string) {
+    print(title?:string) {
+        console.log(title);
         let table = $("#print");
         table.printThis({
             debug: false,               // show the iframe for debugging
@@ -15,9 +16,9 @@ export class PrintProviderService {
             //  loadCSS: "path/to/my.css",  // path to additional css file - use an array [] for multiple
             pageTitle: title,              // add title to print page
             removeInline: false,        // remove all inline styles from print elements
-            printDelay: 333,            // variable print delay; depending on complexity a higher value may be necessary
-            header: `<h1>${header as string}</h1>`,               // prefix to html
-            footer: `<footer>${foot}</footer>`,               // postfix to html
+            printDelay: 30,            // variable print delay; depending on complexity a higher value may be necessary
+            header: `<h1>${title}</h1>`,               // prefix to html
+            footer: `<footer>Teaching Assistant Ultimate</footer>`,               // postfix to html
             base: false,               // preserve the BASE tag, or accept a string for the URL
             formValues: true,           // preserve input/form values
             canvas: false,              // copy canvas elements (experimental)

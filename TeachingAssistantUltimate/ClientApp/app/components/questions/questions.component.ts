@@ -19,6 +19,7 @@ export class QuestionsComponent {
     questions: IQuestions[];
     options: Array<{ option: string }>;
     subject: ISubjects;
+    isSimple: boolean = false;
     ngOnInit(): void {
     }
     constructor(private route: ActivatedRoute, private htpp: HttpProvider, public hand: HttpHandler) {
@@ -27,6 +28,10 @@ export class QuestionsComponent {
         this.subject = this.route.snapshot.data["subject"] as ISubjects;
         this.questions = [];
         this.options = this.addOpts(4);
+    }
+
+    useSimple() {
+        this.isSimple = !this.isSimple;
     }
 
     addOpts(num: number) {
@@ -67,6 +72,8 @@ export class QuestionsComponent {
             this.hand.message = "Question added to your bank";
             this.form.controls['question'].reset();
             this.options.forEach(x => x.option = "");
+            let doc = document.getElementById('question') as HTMLInputElement;
+            doc.focus();
         }, (err: HttpErrorResponse) => {
             this.hand.handleError(err);
         });

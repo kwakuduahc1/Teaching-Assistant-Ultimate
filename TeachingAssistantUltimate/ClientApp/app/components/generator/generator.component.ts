@@ -19,7 +19,7 @@ export class GeneratorComponent {
     max: number = 1;
     questions: IQuestions[] = [];
     usid: number = 0;
-    constructor(route: ActivatedRoute, private http: HttpProvider, private printer: PrintProviderService) {
+    constructor(private route: ActivatedRoute, private http: HttpProvider, private printer: PrintProviderService) {
         this.topics = route.snapshot.data["topics"] as ITopics[];
         this.subject = route.snapshot.data["subject"] as ISubjects;
         this.max = this.topics.length * 4;
@@ -42,7 +42,11 @@ export class GeneratorComponent {
         this.http.genQuestions(vm).subscribe(x => this.setQuestions(x));
     }
 
-    print(): void {
-        this.printer.print("");
+    print(head: string): void {
+        this.printer.print(head);
+    }
+
+    serverPrint() {
+        this.http.print(parseInt(this.route.snapshot.paramMap.get('id') as string)).subscribe(res => console.log(res));
     }
 }
