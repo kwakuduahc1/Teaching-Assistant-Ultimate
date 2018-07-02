@@ -23,13 +23,11 @@ namespace TeachingAssistant.Controllers
             //RenderSimplePdf();
             RenderAdvancedPdf(document);
             //RenderMirrorPages();
-            var questions = (List<TestVm>)TempData["Questions"];
             if (HybridSupport.IsElectronActive)
             {
-                var window = await Electron.WindowManager.CreateWindowAsync(loadUrl: "http://localhost:80");
+                var window = await Electron.WindowManager.CreateWindowAsync(loadUrl: $"http://{req}/generate/{id}");
             }
-            return View(questions);
-            //return Ok(new { Message = "Document was saved to selected location" });
+            return Ok(new { Message = "Document was saved to selected location" });
         }
 
         private static void RenderAdvancedPdf(Document document)
