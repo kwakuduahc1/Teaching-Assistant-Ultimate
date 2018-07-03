@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+require('jquery');
+require('printthis');
 
 @Component({
     selector: 'app',

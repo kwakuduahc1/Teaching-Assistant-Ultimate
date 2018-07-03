@@ -29,12 +29,16 @@ module.exports = (env) => {
     // Configuration for client-side bundle suitable for running in browsers
     const clientBundleOutputDir = './wwwroot/dist';
     const clientBundleConfig = merge(sharedConfig, {
-        entry: { 'jQuery': './ClientApp/dist/jquery-3.3.1.min.js', "printThis": "./ClientApp/dist/PrintThis.js", 'main-client': './ClientApp/boot.browser.ts' },
+        entry: {"printThis": "./ClientApp/dist/PrintThis.js", 'main-client': './ClientApp/boot.browser.ts' },
         output: { path: path.join(__dirname, clientBundleOutputDir) },
         plugins: [
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
+            }),
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
             })
         ].concat(isDevBuild ? [
             // Plugins that apply in development builds only
