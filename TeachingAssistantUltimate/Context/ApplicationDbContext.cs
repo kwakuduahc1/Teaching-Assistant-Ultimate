@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TeachingAssistant.Model;
+using TeachingAssistantUltimate.Model;
 
-namespace TeachingAssistant.Context
+namespace TeachingAssistantUltimate.Context
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-           
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -24,8 +24,8 @@ namespace TeachingAssistant.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Subjects>(x => x.HasData(
-                new Subjects { Subject = "Public Health Nursing", SubjectsID = 1 },
-                new Subjects { Subject = "Basic Infection Prevention and Control", SubjectsID = 2 }
+                new Subjects { Subject = "Public Health Nursing", SubjectsID = 1, SubjectCode = "001" },
+                new Subjects { Subject = "Basic Infection Prevention and Control", SubjectsID = 2, SubjectCode = "002" }
                 ));
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.// For example, you can rename the ASP.NET Identity table names and more.// Add your customizations after calling base.OnModelCreating(builder);

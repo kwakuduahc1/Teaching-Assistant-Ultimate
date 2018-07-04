@@ -74,6 +74,7 @@
     "enhanced-resolve": "^3.4.1",
     "ngx-quill-editor": "^2.2.2",
     "printthis": "^0.1.5",
-    "uglify-es": "^3.2.2"
+    "uglify-es": "^3.2.2",
+    "xlsx": "^0.13.1"
   }
 }

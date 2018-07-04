@@ -9,9 +9,9 @@ using Aspose.Html.Rendering.Pdf;
 using Aspose.Html.Rendering;
 using Aspose.Html.Dom;
 using System.Collections.Generic;
-using TeachingAssistant.Model.ViewModels;
+using TeachingAssistantUltimate.Model.ViewModels;
 
-namespace TeachingAssistant.Controllers
+namespace TeachingAssistantUltimate.Controllers
 {
     public class PrintController : Controller
     {

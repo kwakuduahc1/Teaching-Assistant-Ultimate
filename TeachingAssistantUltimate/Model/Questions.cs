@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TeachingAssistant.Model
+namespace TeachingAssistantUltimate.Model
 {
     public class Questions
     {

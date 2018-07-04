@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TeachingAssistant.Context;
+using TeachingAssistantUltimate.Context;
 
 namespace TeachingAssistantUltimate.Migrations
 {

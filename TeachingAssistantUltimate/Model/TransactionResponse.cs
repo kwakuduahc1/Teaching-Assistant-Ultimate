@@ -1,4 +1,4 @@
-﻿namespace TeachingAssistant.Model
+﻿namespace TeachingAssistantUltimate.Model
 {
     public class TransactionResponse
     {

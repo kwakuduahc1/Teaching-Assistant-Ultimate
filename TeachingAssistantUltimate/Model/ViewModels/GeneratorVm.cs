@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TeachingAssistant.Model.ViewModels
+namespace TeachingAssistantUltimate.Model.ViewModels
 {
     public class GeneratorVm
     {

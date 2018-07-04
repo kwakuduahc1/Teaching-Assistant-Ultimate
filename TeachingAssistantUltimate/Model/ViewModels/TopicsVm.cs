@@ -1,4 +1,4 @@
-﻿namespace TeachingAssistant.Model.ViewModels
+﻿namespace TeachingAssistantUltimate.Model.ViewModels
 {
     //public class TopicsVm
     //{

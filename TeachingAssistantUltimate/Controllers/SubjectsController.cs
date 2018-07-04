@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TeachingAssistant.Context;
-using TeachingAssistant.Model;
+using TeachingAssistantUltimate.Context;
+using TeachingAssistantUltimate.Model;
 
-namespace TeachingAssistant.Controllers
+namespace TeachingAssistantUltimate.Controllers
 {
     public class SubjectsController : Controller
     {
