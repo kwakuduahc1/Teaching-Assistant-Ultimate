@@ -23,7 +23,8 @@ export class AssTypesComponent {
 
     InitForm(fb: FormBuilder): FormGroup {
         return fb.group({
-            subject: ["", Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(200)])]
+            assessmentType: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
+            total: ["", Validators.compose([Validators.required, Validators.min(5), Validators.max(70)])]
         })
     }
 
@@ -32,7 +33,7 @@ export class AssTypesComponent {
         this.hand.error = false;
         this.htpp.addAssTypes(sub).subscribe((res:IAssTypes) => {
             this.types.unshift(res);
-            this.hand.message = "subject added successfully";
+            this.hand.message = `${res.assessmentType} was added successfully`;
             this.form = this.InitForm(new FormBuilder());
         }, (err: HttpErrorResponse) => {
             this.hand.handleError(err);

@@ -18,7 +18,7 @@ namespace TeachingAssistantUltimate.Migrations
 
             modelBuilder.Entity("TeachingAssistantUltimate.Model.AssessmentTypes", b =>
                 {
-                    b.Property<int>("AssessmentTypesID")
+                    b.Property<short>("AssessmentTypesID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AssessmentType")
@@ -32,15 +32,19 @@ namespace TeachingAssistantUltimate.Migrations
                     b.ToTable("AssessmentTypes");
 
                     b.HasData(
-                        new { AssessmentTypesID = 1, AssessmentType = "Quiz", Total = 10.0 },
-                        new { AssessmentTypesID = 2, AssessmentType = "Assignment", Total = 10.0 },
-                        new { AssessmentTypesID = 3, AssessmentType = "Mid-Sem", Total = 20.0 }
+                        new { AssessmentTypesID = (short)1, AssessmentType = "Quiz", Total = 10.0 },
+                        new { AssessmentTypesID = (short)2, AssessmentType = "Assignment", Total = 10.0 },
+                        new { AssessmentTypesID = (short)3, AssessmentType = "Mid-Sem", Total = 20.0 }
                     );
                 });
 
             modelBuilder.Entity("TeachingAssistantUltimate.Model.Classes", b =>
                 {
                     b.Property<byte>("ClassesID");
+
+                    b.Property<string>("ClassName")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
                     b.Property<byte>("Concurrency")
                         .IsConcurrencyToken()
@@ -49,10 +53,6 @@ namespace TeachingAssistantUltimate.Migrations
                     b.Property<string>("IndexPrefix")
                         .IsRequired()
                         .HasMaxLength(20);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(10);
 
                     b.HasKey("ClassesID");
 
@@ -116,9 +116,7 @@ namespace TeachingAssistantUltimate.Migrations
                     b.Property<int>("ResultsID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<byte>("AssessmentTypesID");
-
-                    b.Property<int?>("AssessmentTypesID1");
+                    b.Property<short>("AssessmentTypesID");
 
                     b.Property<double>("Score");
 
@@ -130,7 +128,7 @@ namespace TeachingAssistantUltimate.Migrations
 
                     b.HasKey("ResultsID");
 
-                    b.HasIndex("AssessmentTypesID1");
+                    b.HasIndex("AssessmentTypesID");
 
                     b.HasIndex("StudentsID");
 
@@ -209,14 +207,15 @@ namespace TeachingAssistantUltimate.Migrations
                 {
                     b.HasOne("TeachingAssistantUltimate.Model.AssessmentTypes", "AssessmentTypes")
                         .WithMany("Results")
-                        .HasForeignKey("AssessmentTypesID1");
+                        .HasForeignKey("AssessmentTypesID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TeachingAssistantUltimate.Model.Students", "Students")
                         .WithMany("Results")
                         .HasForeignKey("StudentsID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeachingAssistantUltimate.Model.Subjects")
+                    b.HasOne("TeachingAssistantUltimate.Model.Subjects", "Subjects")
                         .WithMany("Results")
                         .HasForeignKey("SubjectsID")
                         .OnDelete(DeleteBehavior.Cascade);

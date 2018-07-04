@@ -10,8 +10,8 @@ export class ResultsHttpProvider {
         return this.http.get<IAssTypes[]>("/AssessTypes/List");
     }
 
-    findAssTypes(id: number): Observable<IAssTypes[]> {
-        return this.http.get<IAssTypes[]>(`/AssessTypes/Find?id=${id}`);
+    findAssTypes(id: number): Observable<IAssTypes> {
+        return this.http.get<IAssTypes>(`/AssessTypes/Find?id=${id}`);
     }
 
     addAssTypes(ass: IAssTypes): Observable<IAssTypes> {

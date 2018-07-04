@@ -26,6 +26,8 @@ import { PrintProviderService } from './providers/print-provider.service';
 import { AssTypesComponent } from './components/ass-types/ass-types.component';
 import { AssTypesResolver } from './resolvers/AssTypesResolver';
 import { ResultsHttpProvider } from './providers/results-http-provider';
+import { EditAssTypeComponent } from './components/edit-ass-type/edit-ass-type.component';
+import { AssTypeResolver } from './resolvers/AssTypeResolver';
 
 @NgModule({
     declarations: [
@@ -38,9 +40,10 @@ import { ResultsHttpProvider } from './providers/results-http-provider';
         GeneratorComponent,
         QuestionsComponent,
         ViewQuestionComponent,
-        AssTypesComponent
+        AssTypesComponent,
+        EditAssTypeComponent,
     ],
-    providers: [HttpProvider, ResultsHttpProvider, HttpHandler, SubjectsResolver, SubjectResolver, TopicsResolver, PrintProviderService, AssTypesResolver],
+    providers: [HttpProvider, ResultsHttpProvider, HttpHandler, SubjectsResolver, SubjectResolver, TopicsResolver, PrintProviderService, AssTypesResolver, AssTypeResolver],
     exports: [RouterModule],
     imports: [
         CommonModule,
@@ -56,6 +59,7 @@ import { ResultsHttpProvider } from './providers/results-http-provider';
             { path: 'add-question/:id', component: QuestionsComponent, resolve: { subject: SubjectResolver } },
             { path: 'generate/:id', component: GeneratorComponent, resolve: { subject: SubjectResolver, topics: TopicsResolver } },
             { path: 'types', component: AssTypesComponent, resolve: { types: AssTypesResolver } },
+            { path: 'edit-type/:id', component: EditAssTypeComponent, resolve: { type: AssTypeResolver } },
             { path: '**', redirectTo: 'home' }
         ])
     ]
