@@ -25,9 +25,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { PrintProviderService } from './providers/print-provider.service';
 import { AssTypesComponent } from './components/ass-types/ass-types.component';
 import { AssTypesResolver } from './resolvers/AssTypesResolver';
-import { ResultsHttpProvider } from './providers/results-http-provider';
 import { EditAssTypeComponent } from './components/edit-ass-type/edit-ass-type.component';
 import { AssTypeResolver } from './resolvers/AssTypeResolver';
+import { ClassesComponent } from './components/classes/classes.component';
+import { ClassessHttpProvider } from './providers/classes-http-provider';
+import { AssessTypeHttpProvider } from './providers/ass-types-http-provider';
+import { ClassesResolver } from './resolvers/ClassesResolver';
+import { PreviewStudentsComponent } from './components/preview-students/preview-students.component';
+import { StudentsService } from '../Services/students.service';
+import { StudentsHttpProvider } from './providers/students-http-provider';
+import { ClassResolver } from './resolvers/ClassResolver';
+import { AddResultsComponent } from './components/add-results/add-results.component';
 
 @NgModule({
     declarations: [
@@ -42,8 +50,26 @@ import { AssTypeResolver } from './resolvers/AssTypeResolver';
         ViewQuestionComponent,
         AssTypesComponent,
         EditAssTypeComponent,
+        ClassesComponent,
+        PreviewStudentsComponent,
+        AddResultsComponent
     ],
-    providers: [HttpProvider, ResultsHttpProvider, HttpHandler, SubjectsResolver, SubjectResolver, TopicsResolver, PrintProviderService, AssTypesResolver, AssTypeResolver],
+    providers: [
+        HttpProvider,
+        AssessTypeHttpProvider,
+        HttpHandler,
+        SubjectsResolver,
+        SubjectResolver,
+        TopicsResolver,
+        PrintProviderService,
+        AssTypesResolver,
+        AssTypeResolver,
+        ClassessHttpProvider,
+        ClassesResolver,
+        StudentsService,
+        StudentsHttpProvider,
+        ClassResolver
+    ],
     exports: [RouterModule],
     imports: [
         CommonModule,
@@ -60,6 +86,9 @@ import { AssTypeResolver } from './resolvers/AssTypeResolver';
             { path: 'generate/:id', component: GeneratorComponent, resolve: { subject: SubjectResolver, topics: TopicsResolver } },
             { path: 'types', component: AssTypesComponent, resolve: { types: AssTypesResolver } },
             { path: 'edit-type/:id', component: EditAssTypeComponent, resolve: { type: AssTypeResolver } },
+            { path: 'classes', component: ClassesComponent, resolve: { classes: ClassesResolver } },
+            { path: 'preview-students/:id', component: PreviewStudentsComponent, resolve: { "class": ClassResolver } },
+            { path: 'add-results/:id', component: AddResultsComponent, resolve: { "class": ClassResolver } },
             { path: '**', redirectTo: 'home' }
         ])
     ]

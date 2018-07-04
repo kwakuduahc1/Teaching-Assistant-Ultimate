@@ -3,8 +3,8 @@ import { IAssTypes } from '../../model/IAssTypes';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ResultsHttpProvider } from '../../providers/results-http-provider';
 import { HttpHandler } from '../../providers/HttpHandler';
+import { AssessTypeHttpProvider } from '../../providers/ass-types-http-provider';
 
 @Component({
     selector: 'bs-edit-ass-type',
@@ -15,7 +15,7 @@ import { HttpHandler } from '../../providers/HttpHandler';
 export class EditAssTypeComponent {
     type: IAssTypes;
     form: FormGroup;
-    constructor(private route: ActivatedRoute, private router: Router, fb: FormBuilder, private htpp: ResultsHttpProvider, public hand: HttpHandler) {
+    constructor(private route: ActivatedRoute, private router: Router, fb: FormBuilder, private htpp: AssessTypeHttpProvider, public hand: HttpHandler) {
         this.type = this.route.snapshot.data["type"] as IAssTypes;
         this.form = this.InitForm(fb);
     }

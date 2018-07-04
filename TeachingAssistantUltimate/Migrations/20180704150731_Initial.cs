@@ -25,10 +25,11 @@ namespace TeachingAssistantUltimate.Migrations
                 name: "Classes",
                 columns: table => new
                 {
-                    ClassesID = table.Column<byte>(nullable: false),
+                    ClassesID = table.Column<short>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     ClassName = table.Column<string>(maxLength: 10, nullable: false),
                     IndexPrefix = table.Column<string>(maxLength: 20, nullable: false),
-                    Concurrency = table.Column<byte>(nullable: false)
+                    Concurrency = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,18 +59,17 @@ namespace TeachingAssistantUltimate.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     IndexNumber = table.Column<string>(nullable: false),
-                    ClassesID = table.Column<int>(nullable: false),
-                    ClassesID1 = table.Column<byte>(nullable: true)
+                    ClassesID = table.Column<short>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.StudentsID);
                     table.ForeignKey(
-                        name: "FK_Students_Classes_ClassesID1",
-                        column: x => x.ClassesID1,
+                        name: "FK_Students_Classes_ClassesID",
+                        column: x => x.ClassesID,
                         principalTable: "Classes",
                         principalColumn: "ClassesID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -201,9 +201,9 @@ namespace TeachingAssistantUltimate.Migrations
                 column: "SubjectsID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_ClassesID1",
+                name: "IX_Students_ClassesID",
                 table: "Students",
-                column: "ClassesID1");
+                column: "ClassesID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

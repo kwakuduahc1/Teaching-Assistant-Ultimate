@@ -9,7 +9,7 @@ using TeachingAssistantUltimate.Context;
 namespace TeachingAssistantUltimate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180704110243_Initial")]
+    [Migration("20180704150731_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,13 +42,14 @@ namespace TeachingAssistantUltimate.Migrations
 
             modelBuilder.Entity("TeachingAssistantUltimate.Model.Classes", b =>
                 {
-                    b.Property<byte>("ClassesID");
+                    b.Property<short>("ClassesID")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClassName")
                         .IsRequired()
                         .HasMaxLength(10);
 
-                    b.Property<byte>("Concurrency")
+                    b.Property<byte[]>("Concurrency")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
@@ -144,9 +145,7 @@ namespace TeachingAssistantUltimate.Migrations
                     b.Property<int>("StudentsID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ClassesID");
-
-                    b.Property<byte?>("ClassesID1");
+                    b.Property<short>("ClassesID");
 
                     b.Property<string>("IndexNumber")
                         .IsRequired();
@@ -157,7 +156,7 @@ namespace TeachingAssistantUltimate.Migrations
 
                     b.HasKey("StudentsID");
 
-                    b.HasIndex("ClassesID1");
+                    b.HasIndex("ClassesID");
 
                     b.ToTable("Students");
                 });
@@ -227,7 +226,8 @@ namespace TeachingAssistantUltimate.Migrations
                 {
                     b.HasOne("TeachingAssistantUltimate.Model.Classes", "Classes")
                         .WithMany("Students")
-                        .HasForeignKey("ClassesID1");
+                        .HasForeignKey("ClassesID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

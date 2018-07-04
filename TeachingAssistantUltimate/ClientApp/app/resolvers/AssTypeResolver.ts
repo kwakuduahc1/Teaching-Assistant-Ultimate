@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { HttpProvider } from "../providers/http-provider";
 import { IAssTypes } from "../model/IAssTypes";
-import { ResultsHttpProvider } from "../providers/results-http-provider";
+import { AssessTypeHttpProvider } from "../providers/ass-types-http-provider";
 
 @Injectable()
 export class AssTypeResolver implements Resolve<Observable<IAssTypes>> {
@@ -11,7 +11,7 @@ export class AssTypeResolver implements Resolve<Observable<IAssTypes>> {
         return this.http.findAssTypes(parseInt(route.paramMap.get("id") as string)) as Observable<IAssTypes>;
     }
 
-    constructor(private http: ResultsHttpProvider) {
+    constructor(private http: AssessTypeHttpProvider) {
 
     }
 }

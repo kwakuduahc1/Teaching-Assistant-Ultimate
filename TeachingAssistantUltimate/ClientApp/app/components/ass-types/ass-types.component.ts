@@ -3,8 +3,8 @@ import { IAssTypes } from '../../model/IAssTypes';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ResultsHttpProvider } from '../../providers/results-http-provider';
 import { HttpHandler } from '../../providers/HttpHandler';
+import { AssessTypeHttpProvider } from '../../providers/ass-types-http-provider';
 
 @Component({
     selector: 'bs-ass-types',
@@ -15,7 +15,7 @@ import { HttpHandler } from '../../providers/HttpHandler';
 export class AssTypesComponent {
     types: IAssTypes[];
     form: FormGroup;
-    constructor(private route: ActivatedRoute, fb: FormBuilder, private htpp: ResultsHttpProvider, public hand: HttpHandler) {
+    constructor(private route: ActivatedRoute, fb: FormBuilder, private htpp: AssessTypeHttpProvider, public hand: HttpHandler) {
         this.form = this.InitForm(fb);
         this.types = this.route.snapshot.data["types"] as IAssTypes[];
     }

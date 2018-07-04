@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { IAssTypes } from '../model/IAssTypes';
 
 @Injectable()
-export class ResultsHttpProvider {
+export class AssessTypeHttpProvider {
 
     getAssTypes(): Observable<IAssTypes[]> {
         return this.http.get<IAssTypes[]>("/AssessTypes/List");

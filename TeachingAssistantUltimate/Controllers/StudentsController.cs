@@ -41,11 +41,11 @@ namespace TeachingAssistantUltimate.Controllers
             {
                 using (var db = new ApplicationDbContext(dco))
                 {
-                    if (!await db.Students.AnyAsync(x => stds.TrueForAll(t => t.IndexNumber == x.IndexNumber)))
-                        return BadRequest(new { Message = "You have already saved this item" });
+                    if (await db.Students.Where(x => x.ClassesID == stds.First().ClassesID).AnyAsync(x => stds.Any(t => t.IndexNumber == x.IndexNumber)))
+                        return BadRequest(new { Message = "Operation aborted because an index number was found already in the database" });
                     db.AddRange(stds);
                     await db.SaveChangesAsync();
-                    return Created($"/Students/List/id={stds.First().ClassesID}", stds);
+                    return Created($"/Students/List/id={stds.First().ClassesID}", stds.OrderBy(x => x.IndexNumber));
                 }
             }
             return BadRequest(new { Error = "Invalid data was submitted", Message = ModelState.Values.First(x => x.Errors.Count > 0).Errors.Select(t => t.ErrorMessage).First() });

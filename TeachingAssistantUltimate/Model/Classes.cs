@@ -6,7 +6,7 @@ namespace TeachingAssistantUltimate.Model
     public class Classes
     {
         [Key]
-        public byte ClassesID { get; set; }
+        public short ClassesID { get; set; }
 
         [Required, StringLength(10, MinimumLength = 3)]
         public string ClassName { get; set; }
@@ -15,7 +15,7 @@ namespace TeachingAssistantUltimate.Model
         public string IndexPrefix { get; set; }
 
         [Timestamp, ConcurrencyCheck]
-        public byte Concurrency { get; set; }
+        public byte[] Concurrency { get; set; }
 
         public virtual ICollection<Students> Students { get; set; }
     }

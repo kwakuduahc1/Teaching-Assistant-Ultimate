@@ -22,6 +22,7 @@ namespace TeachingAssistantUltimate.Controllers
                 x.SubjectsID,
                 x.Questions.Count,
                 x.Subject,
+                x.SubjectCode,
                 x.Concurrency,
                 Topics = x.Questions.Select(t => t.Topic).Distinct()
             }).SingleOrDefaultAsync(x => x.SubjectsID == id);
@@ -35,7 +36,7 @@ namespace TeachingAssistantUltimate.Controllers
         {
             using (var db = new ApplicationDbContext(dco))
             {
-                return await db.Subjects.Select(x => new { x.Concurrency, x.Questions.Count, x.Subject, x.SubjectsID, Topics = x.Questions.Select(t => t.Topic).Distinct().ToList() })
+                return await db.Subjects.Select(x => new { x.Concurrency, x.SubjectCode, x.Questions.Count, x.Subject, x.SubjectsID, Topics = x.Questions.Select(t => t.Topic).Distinct().ToList() })
                     .ToListAsync();
             }
         }

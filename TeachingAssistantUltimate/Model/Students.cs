@@ -15,7 +15,7 @@ namespace TeachingAssistantUltimate.Model
         public string IndexNumber { get; set; }
 
         [Required]
-        public int ClassesID { get; set; }
+        public short ClassesID { get; set; }
 
         public virtual Classes Classes { get; set; }
 
