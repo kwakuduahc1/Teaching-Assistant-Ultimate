@@ -6,7 +6,7 @@ namespace TeachingAssistantUltimate.Model
     public class AssessmentTypes
     {
         [Key]
-        public int AssessmentTypesID { get; set; }
+        public byte AssessmentTypesID { get; set; }
 
         [Required, StringLength(15, MinimumLength =3)]
         public string AssessmentType { get; set; }
