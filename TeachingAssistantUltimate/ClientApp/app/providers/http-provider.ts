@@ -8,6 +8,10 @@ import { ITopics } from '../model/ITopics';
 
 @Injectable()
 export class HttpProvider {
+
+    getAssTypes() {
+
+    }
     genQuestions(args: ITests): Observable<IQuestions[]> {
         return this.http.post<IQuestions[]>("/Questions/Generate", args)
     }

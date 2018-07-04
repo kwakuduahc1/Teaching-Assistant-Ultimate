@@ -23,6 +23,7 @@ import { QuillEditorModule } from './Editor';
 import { TopicsResolver } from './resolvers/TopicsResolver';
 import { HttpClientModule } from '@angular/common/http';
 import { PrintProviderService } from './providers/print-provider.service';
+import { AssTypesComponent } from './components/ass-types/ass-types.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { PrintProviderService } from './providers/print-provider.service';
         EditSubjectComponent,
         GeneratorComponent,
         QuestionsComponent,
-        ViewQuestionComponent
+        ViewQuestionComponent,
+        AssTypesComponent
     ],
     providers: [HttpProvider, HttpHandler, SubjectsResolver, SubjectResolver, TopicsResolver, PrintProviderService],
     exports: [RouterModule],
@@ -51,6 +53,7 @@ import { PrintProviderService } from './providers/print-provider.service';
             { path: 'edit-subject/:id', component: EditSubjectComponent, resolve: { subject: SubjectResolver } },
             { path: 'add-question/:id', component: QuestionsComponent, resolve: { subject: SubjectResolver } },
             { path: 'generate/:id', component: GeneratorComponent, resolve: { subject: SubjectResolver, topics: TopicsResolver } },
+            { path: 'types', component: AssTypesComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
