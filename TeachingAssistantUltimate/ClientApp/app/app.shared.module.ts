@@ -36,6 +36,8 @@ import { StudentsService } from '../Services/students.service';
 import { StudentsHttpProvider } from './providers/students-http-provider';
 import { ClassResolver } from './resolvers/ClassResolver';
 import { AddResultsComponent } from './components/add-results/add-results.component';
+import { StudentsResolver } from './resolvers/StudentsResolver';
+import { ResultsHttpProvider } from './providers/results-http-provider';
 
 @NgModule({
     declarations: [
@@ -68,7 +70,9 @@ import { AddResultsComponent } from './components/add-results/add-results.compon
         ClassesResolver,
         StudentsService,
         StudentsHttpProvider,
-        ClassResolver
+        ClassResolver,
+        StudentsResolver,
+        ResultsHttpProvider
     ],
     exports: [RouterModule],
     imports: [
@@ -88,7 +92,7 @@ import { AddResultsComponent } from './components/add-results/add-results.compon
             { path: 'edit-type/:id', component: EditAssTypeComponent, resolve: { type: AssTypeResolver } },
             { path: 'classes', component: ClassesComponent, resolve: { classes: ClassesResolver } },
             { path: 'preview-students/:id', component: PreviewStudentsComponent, resolve: { "class": ClassResolver } },
-            { path: 'add-results/:id', component: AddResultsComponent, resolve: { "class": ClassResolver } },
+            { path: 'add-results/:id', component: AddResultsComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects':SubjectsResolver } },
             { path: '**', redirectTo: 'home' }
         ])
     ]

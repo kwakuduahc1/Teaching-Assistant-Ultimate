@@ -6,6 +6,7 @@ import { HttpHandler } from '../../providers/HttpHandler';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IClasses } from '../../model/IClasses';
+import { ISubjects } from '../../model/ISubjects';
 
 @Component({
     selector: 'bs-preview-students',
@@ -20,8 +21,6 @@ export class PreviewStudentsComponent {
         this.students = stds.get();
         this._class = route.snapshot.data["class"];
     }
-
-
     save() {
         this.http.add(this.students).subscribe((res: IStudents[]) => {
             this.router.navigate(['/classes']);

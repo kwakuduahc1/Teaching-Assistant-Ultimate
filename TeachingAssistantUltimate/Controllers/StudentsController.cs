@@ -31,7 +31,7 @@ namespace TeachingAssistantUltimate.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable> List(int id) => await new ApplicationDbContext(dco).Students.Where(x => x.ClassesID == id).Select(x => new { x.Classes.ClassName, x.Name, x.ClassesID, x.StudentsID }).ToListAsync();
+        public async Task<IEnumerable> List(int id) => await new ApplicationDbContext(dco).Students.Where(x => x.ClassesID == id).Select(x => new { x.Classes.ClassName, x.Name, x.ClassesID, x.StudentsID, x.IndexNumber }).ToListAsync();
 
 
         [HttpPost]
