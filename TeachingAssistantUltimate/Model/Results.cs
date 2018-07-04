@@ -31,5 +31,7 @@ namespace TeachingAssistantUltimate.Model
         public virtual Students Students { get; set; }
 
         public virtual AssessmentTypes AssessmentTypes { get; set; }
+
+        public virtual Subjects Subjects { get; set; }
     }
 }

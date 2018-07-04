@@ -9,7 +9,7 @@ namespace TeachingAssistantUltimate.Model
         public byte ClassesID { get; set; }
 
         [Required, StringLength(10, MinimumLength = 3)]
-        public string Name { get; set; }
+        public string ClassName { get; set; }
 
         [Required, StringLength(20, MinimumLength = 3)]
         public string IndexPrefix { get; set; }

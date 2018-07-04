@@ -29,7 +29,7 @@ namespace TeachingAssistantUltimate.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable> List(string id) => await new ApplicationDbContext(dco).AssessmentTypes.Select(x => new { x.AssessmentTypesID, x.AssessmentType, x.Total }).ToListAsync();
+        public async Task<IEnumerable> List() => await new ApplicationDbContext(dco).AssessmentTypes.Select(x => new { x.AssessmentTypesID, x.AssessmentType, x.Total }).ToListAsync();
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]AssessmentTypes assessment)
