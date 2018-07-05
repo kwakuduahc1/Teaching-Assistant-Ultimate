@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TeachingAssistantUltimate.Context;
 using TeachingAssistantUltimate.Model;
+using TeachingAssistantUltimate.Model.ViewModels;
 
 namespace TeachingAssistantUltimate.Controllers
 {
@@ -38,26 +41,45 @@ namespace TeachingAssistantUltimate.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable> List(int id)
+        public async Task<IActionResult> List(int cid, int subject)
         {
+            List<StudentResults> disp = new List<StudentResults>();
+            List<Results> results = new List<Results>();
             using (var db = new ApplicationDbContext(dco))
             {
-                return await db.Results.Where(x => x.Students.ClassesID == id).Select(x => new
-                {
-                    x.AssessmentTypes.AssessmentType,
-                    x.AssessmentTypesID,
-                    x.ResultsID,
-                    x.Score,
-                    x.Students.IndexNumber,
-                    x.Students.Name,
-                    x.StudentsID,
-                    x.SubjectsID,
-                    x.TotalScore,
-                    x.Subjects.SubjectCode,
-                    x.Subjects.Subject
-                })
-                    .ToListAsync();
+                results = await db.Results.Where(x => x.Students.ClassesID == cid && x.SubjectsID == subject).Include(x => x.Students).Include(x => x.AssessmentTypes).ToListAsync();
             }
+            var types = results.Select(x => new { x.AssessmentTypes.AssessmentType, x.AssessmentTypesID, x.AssessmentTypes.Total }).Distinct();
+            var stds = results.Select(x => x.Students).ToList();
+            foreach (var std in stds.Distinct())
+            {
+                var studentResults = new StudentResults
+                {
+                    Name = std.Name,
+                    StudentsID = std.StudentsID,
+                    Results = new List<AssResults>()
+                };
+                foreach (var item in types)
+                {
+                    var res = results.Where(x => x.StudentsID == std.StudentsID && x.AssessmentTypesID == item.AssessmentTypesID).GroupBy(x => new
+                    {
+                        x.AssessmentTypes.AssessmentType,
+                        x.AssessmentTypesID,
+                    }, (k, v) => new AssResults
+                    {
+                        AssessmentType = k.AssessmentType,
+                        AssessmentTypesID = k.AssessmentTypesID,
+                        SumScore = v.Sum(x => x.Score),
+                        SumTotal = v.Sum(x => x.TotalScore),
+                        AssessmentTotal = item.Total
+
+                    }).SingleOrDefault();
+                    studentResults.Results.Add(res);
+                }
+                disp.Add(studentResults);
+            }
+
+            return Ok(new { results = disp.OrderBy(x => x.Name), types });
         }
 
         [HttpPost]
