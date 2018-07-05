@@ -2,13 +2,24 @@
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { IResults } from '../model/IResults';
+import { IResultsDisplay } from '../model/IResultsDisplay';
+import { ISubjects } from '../model/ISubjects';
 
 @Injectable()
 export class ResultsHttpProvider {
 
-    getAll(id:number): Observable<IResults[]> {
-        return this.http.get<IResults[]>(`/Results/List?id=${id}`);
+    viewResults(cid: number, sid: number): Observable<IResultsDisplay[]> {
+        return this.http.get<IResultsDisplay[]>(`/Results/List?cid=${cid}&sid=${sid}`);
     }
+
+    classSubjects(id: number): Observable<ISubjects[]> {
+        return this.http.get<ISubjects[]>(`/Results/ClassSubjects?id=${id}`);
+    }
+
+    getAll(cid: number, sid: number): Observable<IResults[]> {
+        return this.http.get<IResults[]>(`/Results/List?id=${cid}&sid=${sid}`);
+    }
+
 
     find(id: number): Observable<IResults> {
         return this.http.get<IResults>(`/Results/Find?id=${id}`);

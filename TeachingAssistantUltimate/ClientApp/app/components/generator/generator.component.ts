@@ -45,8 +45,4 @@ export class GeneratorComponent {
     print(head: string): void {
         this.printer.print(head);
     }
-
-    serverPrint() {
-        this.http.print(parseInt(this.route.snapshot.paramMap.get('id') as string)).subscribe(res => console.log(res));
-    }
 }

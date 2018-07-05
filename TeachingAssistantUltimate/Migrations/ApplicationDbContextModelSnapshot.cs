@@ -55,6 +55,8 @@ namespace TeachingAssistantUltimate.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
+                    b.Property<byte>("Padding");
+
                     b.HasKey("ClassesID");
 
                     b.ToTable("Classes");

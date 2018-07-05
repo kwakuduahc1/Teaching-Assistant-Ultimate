@@ -19,6 +19,8 @@ namespace TeachingAssistantUltimate.Controllers
         public ResultsController(DbContextOptions<ApplicationDbContext> options) => dco = options;
 
         [HttpGet]
+        public async Task<IEnumerable> ClassSubjects(short id) => await new ApplicationDbContext(dco).Results.Where(x => x.Students.ClassesID == id).Select(x => new { x.SubjectsID, x.Subjects.Subject, x.Subjects.SubjectCode }).Distinct().ToListAsync();
+        [HttpGet]
         public async Task<IActionResult> Find(int id)
         {
             var subj = await new ApplicationDbContext(dco).Results.Select(x => new
@@ -41,13 +43,13 @@ namespace TeachingAssistantUltimate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List(int cid, int subject)
+        public async Task<IActionResult> List(int cid, int sid)
         {
             List<StudentResults> disp = new List<StudentResults>();
             List<Results> results = new List<Results>();
             using (var db = new ApplicationDbContext(dco))
             {
-                results = await db.Results.Where(x => x.Students.ClassesID == cid && x.SubjectsID == subject).Include(x => x.Students).Include(x => x.AssessmentTypes).ToListAsync();
+                results = await db.Results.Where(x => x.Students.ClassesID == cid && x.SubjectsID == sid).Include(x => x.Students).Include(x => x.AssessmentTypes).ToListAsync();
             }
             var types = results.Select(x => new { x.AssessmentTypes.AssessmentType, x.AssessmentTypesID, x.AssessmentTypes.Total }).Distinct();
             var stds = results.Select(x => x.Students).ToList();
@@ -56,6 +58,7 @@ namespace TeachingAssistantUltimate.Controllers
                 var studentResults = new StudentResults
                 {
                     Name = std.Name,
+                    IndexNumber = std.IndexNumber,
                     StudentsID = std.StudentsID,
                     Results = new List<AssResults>()
                 };

@@ -31,7 +31,8 @@ export class ClassesComponent {
     InitForm(fb: FormBuilder): FormGroup {
         return fb.group({
             className: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])],
-            indexPrefix: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])]
+            indexPrefix: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
+            padding:[0,Validators.compose([Validators.required, Validators.min(0), Validators.max(5)])]
         })
     }
 

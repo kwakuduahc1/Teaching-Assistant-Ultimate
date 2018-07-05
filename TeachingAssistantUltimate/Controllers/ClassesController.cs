@@ -23,6 +23,7 @@ namespace TeachingAssistantUltimate.Controllers
                 x.IndexPrefix,
                 x.ClassName,
                 x.Students.Count,
+                x.Padding,
                 x.Concurrency,
             }).SingleOrDefaultAsync(x => x.ClassesID == id);
             if (subj == null)
@@ -31,7 +32,7 @@ namespace TeachingAssistantUltimate.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable> List() => await new ApplicationDbContext(dco).Classes.Select(x => new { x.Concurrency, x.Students.Count, x.ClassName, x.ClassesID, x.IndexPrefix }).ToListAsync();
+        public async Task<IEnumerable> List() => await new ApplicationDbContext(dco).Classes.Select(x => new { x.Concurrency, x.Students.Count, x.ClassName, x.ClassesID, x.IndexPrefix, x.Padding }).ToListAsync();
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]Classes classes)

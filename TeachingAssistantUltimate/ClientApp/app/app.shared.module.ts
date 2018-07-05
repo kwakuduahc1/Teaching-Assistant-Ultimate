@@ -38,6 +38,8 @@ import { ClassResolver } from './resolvers/ClassResolver';
 import { AddResultsComponent } from './components/add-results/add-results.component';
 import { StudentsResolver } from './resolvers/StudentsResolver';
 import { ResultsHttpProvider } from './providers/results-http-provider';
+import { ClassSubjectsResolver } from './resolvers/ClassSubjectsResolver';
+import { ViwResultsComponent } from './components/viw-results/viw-results.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +56,8 @@ import { ResultsHttpProvider } from './providers/results-http-provider';
         EditAssTypeComponent,
         ClassesComponent,
         PreviewStudentsComponent,
-        AddResultsComponent
+        AddResultsComponent,
+        ViwResultsComponent
     ],
     providers: [
         HttpProvider,
@@ -72,7 +75,8 @@ import { ResultsHttpProvider } from './providers/results-http-provider';
         StudentsHttpProvider,
         ClassResolver,
         StudentsResolver,
-        ResultsHttpProvider
+        ResultsHttpProvider,
+        ClassSubjectsResolver
     ],
     exports: [RouterModule],
     imports: [
@@ -92,7 +96,8 @@ import { ResultsHttpProvider } from './providers/results-http-provider';
             { path: 'edit-type/:id', component: EditAssTypeComponent, resolve: { type: AssTypeResolver } },
             { path: 'classes', component: ClassesComponent, resolve: { classes: ClassesResolver } },
             { path: 'preview-students/:id', component: PreviewStudentsComponent, resolve: { "class": ClassResolver } },
-            { path: 'add-results/:id', component: AddResultsComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects':SubjectsResolver } },
+            { path: 'add-results/:id', component: AddResultsComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects': SubjectsResolver } },
+            { path: 'view-results/:id', component: ViwResultsComponent, resolve: { "class": ClassResolver, 'subjects': ClassSubjectsResolver } },
             { path: '**', redirectTo: 'home' }
         ])
     ]

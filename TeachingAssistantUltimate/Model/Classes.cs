@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace TeachingAssistantUltimate.Model
@@ -13,6 +14,10 @@ namespace TeachingAssistantUltimate.Model
 
         [Required, StringLength(20, MinimumLength = 3)]
         public string IndexPrefix { get; set; }
+
+        [Required]
+        [DefaultValue(0)]
+        public byte Padding { get; set; }
 
         [Timestamp, ConcurrencyCheck]
         public byte[] Concurrency { get; set; }

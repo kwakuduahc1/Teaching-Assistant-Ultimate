@@ -9,8 +9,8 @@ using TeachingAssistantUltimate.Context;
 namespace TeachingAssistantUltimate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180704150731_Initial")]
-    partial class Initial
+    [Migration("20180705131130_IndexPadding")]
+    partial class IndexPadding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,6 +56,8 @@ namespace TeachingAssistantUltimate.Migrations
                     b.Property<string>("IndexPrefix")
                         .IsRequired()
                         .HasMaxLength(20);
+
+                    b.Property<byte>("Padding");
 
                     b.HasKey("ClassesID");
 

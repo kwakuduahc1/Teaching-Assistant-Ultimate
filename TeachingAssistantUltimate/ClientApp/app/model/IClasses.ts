@@ -5,5 +5,6 @@ export interface IClasses {
     className: number;
     indexPrefix: string;
     concurrency: string;
-    students:IStudents[]
+    students: IStudents[]
+    padding: number;
 }

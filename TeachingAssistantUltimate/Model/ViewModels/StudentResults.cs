@@ -15,5 +15,6 @@ namespace TeachingAssistantUltimate.Model.ViewModels
         public List<AssResults> Results { get; set; }
 
         public double AssessValue { get; set; }
+        public string IndexNumber { get; internal set; }
     }
 }

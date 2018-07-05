@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TeachingAssistantUltimate.Migrations
 {
-    public partial class Initial : Migration
+    public partial class IndexPadding : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,6 +29,7 @@ namespace TeachingAssistantUltimate.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ClassName = table.Column<string>(maxLength: 10, nullable: false),
                     IndexPrefix = table.Column<string>(maxLength: 20, nullable: false),
+                    Padding = table.Column<byte>(nullable: false),
                     Concurrency = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
