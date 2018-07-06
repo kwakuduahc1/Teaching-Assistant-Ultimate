@@ -4,7 +4,7 @@
     <dt>Class</dt>
     <dd>{{_class.className}}</dd>
 </dl>
-<div class="form-group">
+<div class="form-group row">
     <label class="col-md-2 control-label" for="subject" aria-label="subject">Select Subject</label>
     <div class="col-md-4">
         <select type="text" (change)="get(subject)" [(ngModel)]="subject" aria-labelledby="subject" aria-required="true" aria-relevant="all" class="form-control" id="subject" placeholder="Select Subject">
@@ -12,10 +12,10 @@
         </select>
     </div>
 </div>
-<div class="btn-group">
+<div class="btn-group row" [hidden]="results.results.length<1">
     <button (click)="print()" class="btn btn-primary"><span class="glyphicon glyphicon-print"></span> Print</button>
 </div>
-<table class="table table-striped table-hover table-bordered" id="print">
+<table [hidden]="results.results.length<1" class="table table-striped table-hover table-bordered" id="print">
     <thead>
         <tr>
             <th>Name</th>

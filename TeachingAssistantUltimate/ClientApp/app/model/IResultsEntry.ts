@@ -1,5 +1,6 @@
-﻿export interface IResults {
-    resultsID: number;
+﻿import { IResults } from "./IResults";
+
+export interface IResultsEntry {
     studentsID: number;
     subjectsID: number;
     assessmentTypesID: number;

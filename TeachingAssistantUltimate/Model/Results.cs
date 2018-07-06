@@ -24,6 +24,10 @@ namespace TeachingAssistantUltimate.Model
         [Range(1, 100)]
         public double TotalScore { get; set; }
 
+        [Required]
+        [StringLength(20,MinimumLength =3)]
+        public string Tag { get; set; }
+
         public virtual Students Students { get; set; }
 
         public virtual AssessmentTypes AssessmentTypes { get; set; }

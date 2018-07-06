@@ -11,6 +11,7 @@ import { IAssTypes } from '../../model/IAssTypes';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IResults } from '../../model/IResults';
 import { ResultsHttpProvider } from '../../providers/results-http-provider';
+import { IResultsDisplay } from '../../model/IResultsDisplay';
 
 @Component({
     selector: 'bs-add-results',
@@ -65,7 +66,7 @@ export class AddResultsComponent {
             subjectsID: fm.value["subjectsID"],
             totalScore: fm.value["max"]
         } as IResults));
-        this.http.add(res).subscribe((res: IResults[]) => {
+        this.http.add(res).subscribe((res: IResultsDisplay[]) => {
             this.router.navigate(['/classes']);
         }, (err: HttpErrorResponse) => this.hand.handleError(err));
     }

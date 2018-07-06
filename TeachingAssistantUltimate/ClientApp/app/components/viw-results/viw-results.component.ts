@@ -17,7 +17,7 @@ import { PrintProviderService } from '../../providers/print-provider.service';
 export class ViwResultsComponent {
     _class: IClasses;
     subjects: ISubjects[];
-    results: IResultsDisplay | undefined;
+    results: IResultsDisplay = { results: [], types: [] };
     subject: any;
     header: string = "";
     constructor(route: ActivatedRoute, private router: Router, private http: ResultsHttpProvider, private hand: HttpHandler, private printer: PrintProviderService) {

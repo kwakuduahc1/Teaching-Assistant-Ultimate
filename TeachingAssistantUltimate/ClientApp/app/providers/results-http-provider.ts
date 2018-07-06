@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { IResults } from '../model/IResults';
 import { IResultsDisplay } from '../model/IResultsDisplay';
 import { ISubjects } from '../model/ISubjects';
+import { IResultsEntry } from '../model/IResultsEntry';
 
 @Injectable()
 export class ResultsHttpProvider {
@@ -25,8 +26,8 @@ export class ResultsHttpProvider {
         return this.http.get<IResults>(`/Results/Find?id=${id}`);
     }
 
-    add(res: IResults[]): Observable<IResults[]> {
-        return this.http.post<IResults[]>('/Results/Create', res);
+    add(res: IResultsEntry[]): Observable<IResultsDisplay[]> {
+        return this.http.post<IResultsDisplay[]>('/Results/Create', res);
     }
 
     edit(res: IResults): Observable<IResults> {
