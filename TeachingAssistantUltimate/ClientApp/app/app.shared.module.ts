@@ -40,6 +40,7 @@ import { StudentsResolver } from './resolvers/StudentsResolver';
 import { ResultsHttpProvider } from './providers/results-http-provider';
 import { ClassSubjectsResolver } from './resolvers/ClassSubjectsResolver';
 import { ViwResultsComponent } from './components/viw-results/viw-results.component';
+import { SmartEntryComponent } from './components/smart-entry/smart-entry.component';
 
 @NgModule({
     declarations: [
@@ -57,7 +58,8 @@ import { ViwResultsComponent } from './components/viw-results/viw-results.compon
         ClassesComponent,
         PreviewStudentsComponent,
         AddResultsComponent,
-        ViwResultsComponent
+        ViwResultsComponent,
+        SmartEntryComponent
     ],
     providers: [
         HttpProvider,
@@ -97,6 +99,7 @@ import { ViwResultsComponent } from './components/viw-results/viw-results.compon
             { path: 'classes', component: ClassesComponent, resolve: { classes: ClassesResolver } },
             { path: 'preview-students/:id', component: PreviewStudentsComponent, resolve: { "class": ClassResolver } },
             { path: 'add-results/:id', component: AddResultsComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects': SubjectsResolver } },
+            { path: 'smart-entry/:id', component: SmartEntryComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects': SubjectsResolver } },
             { path: 'view-results/:id', component: ViwResultsComponent, resolve: { "class": ClassResolver, 'subjects': ClassSubjectsResolver } },
             { path: '**', redirectTo: 'home' }
         ])

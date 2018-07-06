@@ -8,8 +8,8 @@ import { ISubjects } from '../model/ISubjects';
 @Injectable()
 export class ResultsHttpProvider {
 
-    viewResults(cid: number, sid: number): Observable<IResultsDisplay[]> {
-        return this.http.get<IResultsDisplay[]>(`/Results/List?cid=${cid}&sid=${sid}`);
+    viewResults(cid: number, sid: number): Observable<IResultsDisplay> {
+        return this.http.get<IResultsDisplay>(`/Results/List?cid=${cid}&sid=${sid}`);
     }
 
     classSubjects(id: number): Observable<ISubjects[]> {
