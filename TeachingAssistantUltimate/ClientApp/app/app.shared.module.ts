@@ -105,7 +105,7 @@ import { TagsResolver } from './resolvers/TagsResolver';
             { path: 'add-results/:id', component: AddResultsComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects': SubjectsResolver } },
             { path: 'smart-entry/:id', component: SmartEntryComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects': SubjectsResolver } },
             { path: 'view-results/:id', component: ViwResultsComponent, resolve: { "class": ClassResolver, 'subjects': ClassSubjectsResolver } },
-            { path: 'tag-results/:id', component: TagResultsComponent, resolve: { "class": ClassResolver, 'subjects': ClassSubjectsResolver, 'tags': TagsResolver } },
+            { path: 'tag-results/:id', component: TagResultsComponent, resolve: { "class": ClassResolver, 'subjects': ClassSubjectsResolver, 'tags': TagsResolver, 'types': AssTypesResolver } },
             { path: '**', redirectTo: 'home' }
         ])
     ]

@@ -37,7 +37,8 @@ namespace TeachingAssistantUltimate.Controllers
             x.SubjectsID,
             x.TotalScore,
             x.Subjects.SubjectCode,
-            x.Subjects.Subject
+            x.Subjects.Subject,
+            x.Tag
         }).ToListAsync();
 
         [HttpGet]
