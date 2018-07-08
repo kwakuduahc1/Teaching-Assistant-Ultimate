@@ -27,7 +27,7 @@ export class SmartEntryComponent {
     types: IAssTypes[]
     maxScore: number = 20;
     canUpload: boolean = false;
-    constructor(private http: ResultsHttpProvider, fb: FormBuilder, route: ActivatedRoute, private hand: HttpHandler) {
+    constructor(private http: ResultsHttpProvider, fb: FormBuilder, route: ActivatedRoute, public hand: HttpHandler) {
         this.form = this.initForm(fb);
         this.students = route.snapshot.data["students"];
         this._class = route.snapshot.data["class"];
@@ -40,7 +40,7 @@ export class SmartEntryComponent {
             number: [0, Validators.compose([Validators.required, Validators.min(1)])],
             score: [0, Validators.compose([Validators.required, Validators.min(0), Validators.max(this.maxScore)])],
             type: ["", Validators.compose([Validators.required, Validators.min(1)])],
-            tag: ["First Quiz", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
+            tag: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
             sid: ["", Validators.compose([Validators.required, Validators.min(1)])],
             max: [this.maxScore, Validators.compose([Validators.required, Validators.min(1)])]
         });
@@ -54,7 +54,7 @@ export class SmartEntryComponent {
         let ixn = this.getIx(res.number);
         let std: IStudents = this.students.find(x => x.indexNumber === ixn) as IStudents;
         if (!std) {
-            alert("No student was found matching the index number provided");
+            alert(`No student was found matching the index number : ${ixn} provided`);
             this.focus();
             return;
         }

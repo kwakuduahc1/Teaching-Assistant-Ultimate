@@ -6,7 +6,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label" aria-label="sid" for="sid">Select Subject</label>
             <div class="col-md-6" aria-labelledby="sid" [ngClass]="form.controls.sid?.errors ? 'has-error' : 'has-success'">
-                <select class="form-control"
+                <select aria-controls="sid" aria-required="true" aria-readonly="true" class="form-control"
                         id="sid"
                         title="The subject for which the score is being recorded"
                         formControlName="sid">
@@ -20,7 +20,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label" aria-label="type" for="type">Select type</label>
             <div class="col-md-6" aria-labelledby="type" [ngClass]="form.controls.type?.errors ? 'has-error' : 'has-success'">
-                <select class="form-control"
+                <select aria-required="true" aria-selected="false" class="form-control"
                         id="type"
                         title="The type for which the score is being recorded"
                         formControlName="type">
@@ -34,7 +34,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label" aria-label="max" for="max">Max Score</label>
             <div class="col-md-6" aria-labelledby="max" [ngClass]="form.controls.max?.errors ? 'has-error' : 'has-success'">
-                <input type="number"
+                <input aria-required="true" type="number"
                        class="form-control"
                        id="max"
                        title="the maximum score a student should get for this examination"
@@ -62,7 +62,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label" aria-label="number" for="number">Number</label>
             <div class="col-md-6" aria-labelledby="number" [ngClass]="form.controls.number?.errors ? 'has-error' : 'has-success'">
-                <input type="number"
+                <input aria-required="true" type="number"
                        class="form-control"
                        id="number"
                        title="the number of the student, without the preceding zeros"
@@ -76,7 +76,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label" aria-label="score" for="score">Score</label>
             <div class="col-md-6" aria-labelledby="score" [ngClass]="form.controls.score?.errors ? 'has-error' : 'has-success'">
-                <input type="number"
+                <input aria-required="true" type="number"
                        class="form-control"
                        id="score"
                        title="the score of the student"
@@ -88,14 +88,14 @@
             <span [ngClass]="form.controls.score.errors?.min ? 'text-danger' : ''" *ngIf="form.controls.score.errors?.min">The minimum {{form.controls.score.errors.min.min}}</span>
         </div>
         <div class="col-md-offset-2 btn-group">
-            <button [disabled]="form.invalid || hand.processing" type="submit" [ngClass]="form.invalid ? 'btn-danger' : 'btn-success'" class="btn"><span class="glyphicon glyphicon-addition-sign"> Add Subject</span></button>
+            <button title="Add results button. Using smart programming, clicking this button will infer the index number of the student by typing only the last digits of the student's index number. The index number is then attached ot the score and added to the list below" aria-label="add results button" aria-readonly="" [disabled]="form.invalid || hand.processing" type="submit" [ngClass]="form.invalid ? 'btn-danger' : 'btn-success'" class="btn"><span class="glyphicon glyphicon-addition-sign"> Add Results</span></button>
         </div>
         <div [ngClass]="hand.error ? 'alert-danger' : 'alert-info'">{{hand.message}}</div>
     </fieldset>
 </form>
 <h2 class="h2" [hidden]="results.length<1">Results of students</h2>
 <div [hidden]="!canUpload" class="" >
-    <button id="upload" name="upload" class="btn btn-primary" (click)="addResults()"><span class="glyphicon glyphicon-upload"></span> Upload</button>
+    <button id="upload" name="upload" class="btn btn-primary" title="Save button. If the actions are successful after clicking this button, you will be routed to the class page" (click)="addResults()"><span class="glyphicon glyphicon-upload"></span> Upload</button>
 </div>
 <table [hidden]="results.length<1" class="table table-striped table-bordered table-hover">
     <caption class="caption">Results of students in {{_class.className}}</caption>

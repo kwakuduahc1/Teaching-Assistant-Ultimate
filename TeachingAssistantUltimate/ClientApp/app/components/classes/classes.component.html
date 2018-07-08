@@ -84,6 +84,9 @@
                 <button [disabled]="c.count<1" title="Smart entry allows you to enter results in no particular order. Just pick a sheet, enter the number and the score and the computer will find the student with that index number and assign the score appropriately" type="button" class="btn btn-secondary" [routerLink]="['/smart-entry',c.classesID]"><span class="glyphicon glyphicon-stats"></span> Smart Entry</button>
             </td>
             <td>
+                <button [disabled]="c.count<1" title="View and modify results entry." type="button" class="btn btn-success" [routerLink]="['/tag-results',c.classesID]"><span class="glyphicon glyphicon-globe"></span> Tag Results</button>
+            </td>
+            <td>
                 <button [disabled]="c.count<1" type="button" class="btn btn-default" [routerLink]="['/view-results',c.classesID]"><span class="glyphicon glyphicon-eye-open"></span> View Results</button>
             </td>
             <td>

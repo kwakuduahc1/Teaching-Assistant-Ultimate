@@ -20,6 +20,26 @@ namespace TeachingAssistantUltimate.Controllers
 
         [HttpGet]
         public async Task<IEnumerable> ClassSubjects(short id) => await new ApplicationDbContext(dco).Results.Where(x => x.Students.ClassesID == id).Select(x => new { x.SubjectsID, x.Subjects.Subject, x.Subjects.SubjectCode }).Distinct().ToListAsync();
+
+        [HttpGet]
+        public async Task<IEnumerable> Tags(int cid) => await new ApplicationDbContext(dco).Results.Where(x => x.Students.ClassesID == cid).Select(x => new { x.Tag, x.AssessmentTypes.AssessmentType, x.AssessmentTypesID, x.TotalScore }).Distinct().ToListAsync();
+
+        [HttpGet]
+        public async Task<IEnumerable> TagResults(string tag, int cid, int sid) => await new ApplicationDbContext(dco).Results.Where(x => x.Tag == tag && x.Students.ClassesID == cid && x.SubjectsID == sid).Select(x => new
+        {
+            x.AssessmentTypes.AssessmentType,
+            x.AssessmentTypesID,
+            x.ResultsID,
+            x.Score,
+            x.Students.IndexNumber,
+            x.Students.Name,
+            x.StudentsID,
+            x.SubjectsID,
+            x.TotalScore,
+            x.Subjects.SubjectCode,
+            x.Subjects.Subject
+        }).ToListAsync();
+
         [HttpGet]
         public async Task<IActionResult> Find(int id)
         {
@@ -36,7 +56,7 @@ namespace TeachingAssistantUltimate.Controllers
                 x.TotalScore,
                 x.Subjects.SubjectCode,
                 x.Subjects.Subject
-            }).SingleOrDefaultAsync(x => x.SubjectsID == id);
+            }).SingleOrDefaultAsync(x => x.ResultsID == id);
             if (subj == null)
                 return NotFound();
             return Ok(subj);

@@ -41,6 +41,8 @@ import { ResultsHttpProvider } from './providers/results-http-provider';
 import { ClassSubjectsResolver } from './resolvers/ClassSubjectsResolver';
 import { ViwResultsComponent } from './components/viw-results/viw-results.component';
 import { SmartEntryComponent } from './components/smart-entry/smart-entry.component';
+import { TagResultsComponent } from './components/tag-results/tag-results.component';
+import { TagsResolver } from './resolvers/TagsResolver';
 
 @NgModule({
     declarations: [
@@ -59,7 +61,8 @@ import { SmartEntryComponent } from './components/smart-entry/smart-entry.compon
         PreviewStudentsComponent,
         AddResultsComponent,
         ViwResultsComponent,
-        SmartEntryComponent
+        SmartEntryComponent,
+        TagResultsComponent
     ],
     providers: [
         HttpProvider,
@@ -78,7 +81,8 @@ import { SmartEntryComponent } from './components/smart-entry/smart-entry.compon
         ClassResolver,
         StudentsResolver,
         ResultsHttpProvider,
-        ClassSubjectsResolver
+        ClassSubjectsResolver,
+        TagsResolver
     ],
     exports: [RouterModule],
     imports: [
@@ -101,6 +105,7 @@ import { SmartEntryComponent } from './components/smart-entry/smart-entry.compon
             { path: 'add-results/:id', component: AddResultsComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects': SubjectsResolver } },
             { path: 'smart-entry/:id', component: SmartEntryComponent, resolve: { "class": ClassResolver, 'students': StudentsResolver, 'types': AssTypesResolver, 'subjects': SubjectsResolver } },
             { path: 'view-results/:id', component: ViwResultsComponent, resolve: { "class": ClassResolver, 'subjects': ClassSubjectsResolver } },
+            { path: 'tag-results/:id', component: TagResultsComponent, resolve: { "class": ClassResolver, 'subjects': ClassSubjectsResolver, 'tags': TagsResolver } },
             { path: '**', redirectTo: 'home' }
         ])
     ]

@@ -5,6 +5,7 @@ import { IResults } from '../model/IResults';
 import { IResultsDisplay } from '../model/IResultsDisplay';
 import { ISubjects } from '../model/ISubjects';
 import { IResultsEntry } from '../model/IResultsEntry';
+import { ITags } from '../model/ITags';
 
 @Injectable()
 export class ResultsHttpProvider {
@@ -15,6 +16,14 @@ export class ResultsHttpProvider {
 
     classSubjects(id: number): Observable<ISubjects[]> {
         return this.http.get<ISubjects[]>(`/Results/ClassSubjects?id=${id}`);
+    }
+
+    getTags(cid: number): Observable<ITags[]> {
+        return this.http.get<ITags[]>(`Results/Tags?cid=${cid}`)
+    }
+
+    resultsByTags(tag: string, cid: number, sid: number): Observable<IResultsDisplay[]> {
+        return this.http.get<IResultsDisplay[]>(`Results/TagResults?cid=${cid}&tag=${tag}&sid=${sid}`)
     }
 
     getAll(cid: number, sid: number): Observable<IResults[]> {

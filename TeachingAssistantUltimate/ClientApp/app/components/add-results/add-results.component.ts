@@ -41,6 +41,7 @@ export class AddResultsComponent {
         return fb.group({
             subjectsID: ['', Validators.compose([Validators.required])],
             assessmentTypesID: ['', Validators.compose([Validators.required])],
+            tag: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
             max: [this.max, Validators.compose([Validators.required, Validators.max(100), Validators.min(5)])]
         });
     }
@@ -64,7 +65,8 @@ export class AddResultsComponent {
             score: x.value["score"],
             studentsID: x.value["studentsID"],
             subjectsID: fm.value["subjectsID"],
-            totalScore: fm.value["max"]
+            totalScore: fm.value["max"],
+            tag:fm.value['tag']
         } as IResults));
         this.http.add(res).subscribe((res: IResultsDisplay[]) => {
             this.router.navigate(['/classes']);

@@ -1,0 +1,63 @@
+﻿<title>tag results</title>
+<meta name="abstract" content="View and modify results for {{_class.className}} by filtering the tags used" />
+<dl class="dl-horizontal h3">
+    <dt>Class</dt>
+    <dd>{{_class.className}}</dd>
+</dl>
+<form id="form" [hidden]="!status" name="form"  (submit)="search(form.value)"[formGroup]="form" class="form-horizontal">
+    <fieldset>
+        <legend>Select the initial data</legend>
+        <div class="form-group">
+            <label class="col-md-2 control-label" aria-label="" for="subjectsID">Subject</label>
+            <div class="col-md-6" aria-labelledby="subjectsID" [ngClass]="form.controls.subjectsID?.errors ? 'has-error' : 'has-success'">
+                <select class="form-control"
+                        id="subjectsID"
+                        title="select the subject for which you are recording this score"
+                        formControlName="subjectsID"
+                        placeholder="subjectsID">
+                    <option [ngValue]="s.subjectsID" *ngFor="let s of subjects">{{s.subject}} - Code:{{s.subjectCode}}</option>
+                </select>
+            </div>
+            <span [ngClass]="form.controls.subjectsID.errors?.maxlength ? 'text-danger' : ''" *ngIf="form.controls.subjectsID.errors?.maxlength">The maximum length is {{form.controls.subjectsID.errors.max.max}} characters: Current is {{form.controls.subjectsID.errors.max.max}}</span>
+            <span [ngClass]="form.controls.subjectsID.errors?.required ? 'text-danger' : ''" *ngIf="form.controls.subjectsID.errors?.required">Enter subjectsID</span>
+            <span [ngClass]="form.controls.subjectsID.errors?.minlength ? 'text-danger' : ''" *ngIf="form.controls.subjectsID.errors?.minlength">The minimum length is {{form.controls.subjectsID.errors.min.min}} characters: Current is {{form.controls.subjectsID.errors.min.min}}</span>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" aria-label="" for="tag">Tag</label>
+            <div class="col-md-6" aria-labelledby="tag" [ngClass]="form.controls.tag?.errors ? 'has-error' : 'has-success'">
+                <select class="form-control"
+                        id="tag"
+                        title="Select a tag to find the results"
+                        formControlName="tag">
+                    <option *ngFor="let t of tags" [ngValue]="t">{{t.tag}}</option>
+                </select>
+            </div>
+            <span [ngClass]="form.controls.tag.errors?.maxlength ? 'text-danger' : ''" *ngIf="form.controls.tag.errors?.maxlength">The maximum length is {{form.controls.tag.errors.maxlength.requiredLength}} characters: Current is {{form.controls.tag.errors.maxlength.actualLength}}</span>
+            <span [ngClass]="form.controls.tag.errors?.required ? 'text-danger' : ''" *ngIf="form.controls.tag.errors?.required">Enter tag</span>
+            <span [ngClass]="form.controls.tag.errors?.minlength ? 'text-danger' : ''" *ngIf="form.controls.tag.errors?.minlength">The minimum length is {{form.controls.tag.errors.minlength.requiredLength}} characters: Current is {{form.controls.tag.errors.minlength.actualLength}}</span>
+        </div>
+    </fieldset>
+    <div class="col-md-offset-2">
+    <button class="btn" type="submit" [disabled]="form.invalid" [ngClass]="form.invalid ? 'btn-danger' : 'btn-success'"><span class="glyphicon glyphicon-ice-lolly-tasted"></span> Fetch</button>
+    </div>
+</form>
+<h2>Student Results</h2>
+<table class="table table-hover table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Index Number</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of results">
+            <td>{{r.name}}</td>
+            <td>{{r.indexNumber}}</td>
+            <td>{{r.score}}</td>
+            <td>
+                <button (click)="edit(r)" type="button" title="Edit this results for {{r.name}}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
