@@ -26,7 +26,8 @@ export class SubjectsComponent implements OnInit {
 
     InitForm(fb: FormBuilder): FormGroup {
         return fb.group({
-            subject: ["", Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(200)])]
+            subject: ["", Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(200)])],
+            subjectCode: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])]
         })
     }
 

@@ -6,9 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TeachingAssistant.Context;
-using TeachingAssistant.Model;
-using TeachingAssistant.Model.ViewModels;
+using TeachingAssistantUltimate.Context;
+using TeachingAssistantUltimate.Model;
+using TeachingAssistantUltimate.Model.ViewModels;
 
 namespace CampusConnectApp.Controllers
 {

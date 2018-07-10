@@ -5,9 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { IQuestions } from '../model/IQuestsions';
 import { ITests } from '../model/ITests';
 import { ITopics } from '../model/ITopics';
+import { IAssTypes } from '../model/IAssTypes';
 
 @Injectable()
 export class HttpProvider {
+
     genQuestions(args: ITests): Observable<IQuestions[]> {
         return this.http.post<IQuestions[]>("/Questions/Generate", args)
     }

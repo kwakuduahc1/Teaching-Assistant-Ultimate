@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TeachingAssistant.Context;
+using TeachingAssistantUltimate.Context;
 
 namespace TeachingAssistantUltimate.Controllers
 {

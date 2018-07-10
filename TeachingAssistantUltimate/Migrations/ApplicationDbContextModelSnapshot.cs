@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TeachingAssistant.Context;
+using TeachingAssistantUltimate.Context;
 
 namespace TeachingAssistantUltimate.Migrations
 {
@@ -16,7 +16,53 @@ namespace TeachingAssistantUltimate.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846");
 
-            modelBuilder.Entity("TeachingAssistant.Model.Options", b =>
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.AssessmentTypes", b =>
+                {
+                    b.Property<short>("AssessmentTypesID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AssessmentType")
+                        .IsRequired()
+                        .HasMaxLength(15);
+
+                    b.Property<double>("Total");
+
+                    b.HasKey("AssessmentTypesID");
+
+                    b.ToTable("AssessmentTypes");
+
+                    b.HasData(
+                        new { AssessmentTypesID = (short)1, AssessmentType = "Quiz", Total = 10.0 },
+                        new { AssessmentTypesID = (short)2, AssessmentType = "Assignment", Total = 10.0 },
+                        new { AssessmentTypesID = (short)3, AssessmentType = "Mid-Sem", Total = 20.0 }
+                    );
+                });
+
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Classes", b =>
+                {
+                    b.Property<short>("ClassesID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClassName")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<byte[]>("Concurrency")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("IndexPrefix")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<byte>("Padding");
+
+                    b.HasKey("ClassesID");
+
+                    b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Options", b =>
                 {
                     b.Property<Guid>("OptionsID")
                         .ValueGeneratedOnAdd();
@@ -40,7 +86,7 @@ namespace TeachingAssistantUltimate.Migrations
                     b.ToTable("Options");
                 });
 
-            modelBuilder.Entity("TeachingAssistant.Model.Questions", b =>
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Questions", b =>
                 {
                     b.Property<Guid>("QuestionsID")
                         .ValueGeneratedOnAdd();
@@ -68,7 +114,58 @@ namespace TeachingAssistantUltimate.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("TeachingAssistant.Model.Subjects", b =>
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Results", b =>
+                {
+                    b.Property<int>("ResultsID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<short>("AssessmentTypesID");
+
+                    b.Property<double>("Score");
+
+                    b.Property<int>("StudentsID");
+
+                    b.Property<int>("SubjectsID");
+
+                    b.Property<string>("Tag")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<double>("TotalScore");
+
+                    b.HasKey("ResultsID");
+
+                    b.HasIndex("AssessmentTypesID");
+
+                    b.HasIndex("StudentsID");
+
+                    b.HasIndex("SubjectsID");
+
+                    b.ToTable("Results");
+                });
+
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Students", b =>
+                {
+                    b.Property<int>("StudentsID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<short>("ClassesID");
+
+                    b.Property<string>("IndexNumber")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("StudentsID");
+
+                    b.HasIndex("ClassesID");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Subjects", b =>
                 {
                     b.Property<int>("SubjectsID")
                         .ValueGeneratedOnAdd();
@@ -81,29 +178,59 @@ namespace TeachingAssistantUltimate.Migrations
                         .IsRequired()
                         .HasMaxLength(250);
 
+                    b.Property<string>("SubjectCode")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
                     b.HasKey("SubjectsID");
 
                     b.ToTable("Subjects");
 
                     b.HasData(
-                        new { SubjectsID = 1, Subject = "Public Health Nursing" },
-                        new { SubjectsID = 2, Subject = "Basic Infection Prevention and Control" }
+                        new { SubjectsID = 1, Subject = "Public Health Nursing", SubjectCode = "001" },
+                        new { SubjectsID = 2, Subject = "Basic Infection Prevention and Control", SubjectCode = "002" }
                     );
                 });
 
-            modelBuilder.Entity("TeachingAssistant.Model.Options", b =>
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Options", b =>
                 {
-                    b.HasOne("TeachingAssistant.Model.Questions", "Questions")
+                    b.HasOne("TeachingAssistantUltimate.Model.Questions", "Questions")
                         .WithMany("Options")
                         .HasForeignKey("QuestionsID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeachingAssistant.Model.Questions", b =>
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Questions", b =>
                 {
-                    b.HasOne("TeachingAssistant.Model.Subjects", "Subjects")
+                    b.HasOne("TeachingAssistantUltimate.Model.Subjects", "Subjects")
                         .WithMany("Questions")
                         .HasForeignKey("SubjectsID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Results", b =>
+                {
+                    b.HasOne("TeachingAssistantUltimate.Model.AssessmentTypes", "AssessmentTypes")
+                        .WithMany("Results")
+                        .HasForeignKey("AssessmentTypesID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TeachingAssistantUltimate.Model.Students", "Students")
+                        .WithMany("Results")
+                        .HasForeignKey("StudentsID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TeachingAssistantUltimate.Model.Subjects", "Subjects")
+                        .WithMany("Results")
+                        .HasForeignKey("SubjectsID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TeachingAssistantUltimate.Model.Students", b =>
+                {
+                    b.HasOne("TeachingAssistantUltimate.Model.Classes", "Classes")
+                        .WithMany("Students")
+                        .HasForeignKey("ClassesID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

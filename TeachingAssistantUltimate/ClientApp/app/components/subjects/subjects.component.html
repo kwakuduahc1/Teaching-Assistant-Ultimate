@@ -1,27 +1,41 @@
 <title>Subjects</title>
 <h1 class="h1">Subjects</h1>
 <form id="form" name="form" [formGroup]="form" (submit)="add(form.value)" class="form-horizontal">
-  <fieldset>
-    <legend>Add a new subject</legend>
-    <div class="form-group">
-      <label class="col-md-2 control-label" for="subject">Subject</label>
-      <div class="col-md-6" [ngClass]="form.controls.subject?.errors ? 'has-error' : 'has-success'">
-        <input type="tel"
-               class="form-control"
-               id="subject"
-               title="subject name here"
-               formControlName="subject"
-               placeholder="subject">
-      </div>
-      <span [ngClass]="form.controls.subject.errors?.maxlength ? 'text-danger' : ''" *ngIf="form.controls.subject.errors?.maxlength">The maximum length is {{form.controls.subject.errors.maxlength.requiredLength}} characters: Current is {{form.controls.subject.errors.maxlength.actualLength}}</span>
-      <span [ngClass]="form.controls.subject.errors?.required ? 'text-danger' : ''" *ngIf="form.controls.subject.errors?.required">Enter subject</span>
-      <span [ngClass]="form.controls.subject.errors?.minlength ? 'text-danger' : ''" *ngIf="form.controls.subject.errors?.minlength">The minimum length is {{form.controls.subject.errors.minlength.requiredLength}} characters: Current is {{form.controls.subject.errors.minlength.actualLength}}</span>
-    </div>
-    <div class="col-md-offset-3 btn-group">
-      <button [disabled]="form.invalid || hand.processing" type="submit" [ngClass]="form.invalid ? 'btn-danger' : 'btn-success'" class="btn"><span class="glyphicon glyphicon-addition-sign"> Add Subject</span></button>
-    </div>
-    <div [ngClass]="hand.error ? 'alert-danger' : 'alert-info'">{{hand.message}}</div>
-  </fieldset>
+    <fieldset>
+        <legend>Add a new subject</legend>
+        <div class="form-group">
+            <label class="col-md-2 control-label" aria-label="" for="subject">Subject</label>
+            <div class="col-md-6" aria-labelledby="subject" [ngClass]="form.controls.subject?.errors ? 'has-error' : 'has-success'">
+                <input type="text"
+                       class="form-control"
+                       id="subject"
+                       title="subject name here"
+                       formControlName="subject"
+                       placeholder="subject">
+            </div>
+            <span [ngClass]="form.controls.subject.errors?.maxlength ? 'text-danger' : ''" *ngIf="form.controls.subject.errors?.maxlength">The maximum length is {{form.controls.subject.errors.maxlength.requiredLength}} characters: Current is {{form.controls.subject.errors.maxlength.actualLength}}</span>
+            <span [ngClass]="form.controls.subject.errors?.required ? 'text-danger' : ''" *ngIf="form.controls.subject.errors?.required">Enter subject</span>
+            <span [ngClass]="form.controls.subject.errors?.minlength ? 'text-danger' : ''" *ngIf="form.controls.subject.errors?.minlength">The minimum length is {{form.controls.subject.errors.minlength.requiredLength}} characters: Current is {{form.controls.subject.errors.minlength.actualLength}}</span>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="subjectCode" aria-label="">Code</label>
+            <div class="col-md-6" aria-labelledby="subjectCode" [ngClass]="form.controls.subjectCode?.errors ? 'has-error' : 'has-success'">
+                <input type="text"
+                       class="form-control"
+                       id="subjectCode"
+                       title="subject code here"
+                       formControlName="subjectCode"
+                       placeholder="subject code">
+            </div>
+            <span [ngClass]="form.controls.subjectCode.errors?.maxlength ? 'text-danger' : ''" *ngIf="form.controls.subjectCode.errors?.maxlength">The maximum length is {{form.controls.subjectCode.errors.maxlength.requiredLength}} characters: Current is {{form.controls.subjectCode.errors.maxlength.actualLength}}</span>
+            <span [ngClass]="form.controls.subjectCode.errors?.required ? 'text-danger' : ''" *ngIf="form.controls.subjectCode.errors?.required">Enter subject code</span>
+            <span [ngClass]="form.controls.subjectCode.errors?.minlength ? 'text-danger' : ''" *ngIf="form.controls.subjectCode.errors?.minlength">The minimum length is {{form.controls.subjectCode.errors.minlength.requiredLength}} characters: Current is {{form.controls.subjectCode.errors.minlength.actualLength}}</span>
+        </div>
+        <div class="col-md-offset-3 btn-group">
+            <button [disabled]="form.invalid || hand.processing" type="submit" [ngClass]="form.invalid ? 'btn-danger' : 'btn-success'" class="btn"><span class="glyphicon glyphicon-addition-sign"> Add Subject</span></button>
+        </div>
+        <div [ngClass]="hand.error ? 'alert-danger' : 'alert-info'">{{hand.message}}</div>
+    </fieldset>
 </form>
 
 <h2 class="h2">Your saved subjects</h2>
@@ -29,6 +43,7 @@
   <thead>
     <tr>
       <th>Subject</th>
+      <th>Code</th>
       <th>Questions</th>
       <th>Topics</th>
       <th>Edit</th>
@@ -40,6 +55,7 @@
   <tbody>
     <tr *ngFor="let s of subjects">
       <td>{{s.subject}}</td>
+      <td>{{s.subjectCode}}</td>
       <td>{{s.count}}</td>
       <td><span class="badge" *ngFor="let t of s.topics">{{t + ','}}</span></td>
       <td>

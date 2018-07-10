@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TeachingAssistant.Model.ViewModels
+namespace TeachingAssistantUltimate.Model.ViewModels
 {
     public class TestVm
     {

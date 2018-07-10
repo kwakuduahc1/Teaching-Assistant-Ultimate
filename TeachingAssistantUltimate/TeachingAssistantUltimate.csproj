@@ -6,6 +6,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="ClientApp\app\model\ITags.ts" />
     <None Remove="ClientApp\dist\jquery-3.3.1.min.js" />
     <None Remove="ClientApp\dist\printThis.js" />
   </ItemGroup>
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\Editor\quill\node_modules\eventemitter3\index.d.ts" />
+    <TypeScriptCompile Include="ClientApp\app\model\ITags.ts" />
   </ItemGroup>
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->

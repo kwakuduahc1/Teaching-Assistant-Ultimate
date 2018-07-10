@@ -9,7 +9,7 @@ namespace TeachingAssistantUltimate
     {
         public static void Main(string[] args)
         {
-            if (DateTime.Now.Date > DateTime.Parse("July 14, 2018").Date)
+            if (DateTime.Now.Date > DateTime.Parse("December 31, 2018").Date)
                 throw new Exception("Evaluation Period is over");
             BuildWebHost(args).Run();
         }

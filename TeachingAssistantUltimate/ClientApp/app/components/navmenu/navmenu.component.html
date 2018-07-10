@@ -1,3 +1,4 @@
+<meta name="abstract" content="Navigatio pane" />
 <div class='main-nav'>
     <div class='navbar navbar-inverse'>
         <div class='navbar-header'>
@@ -7,19 +8,24 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]="['/home']">Teaching Assistant</a>
+            <a class='navbar-brand' [routerLink]="['/home']"><img style="width:100%; height:150%" src="../../assets/imgs/Teaching Assistant Banner.png" alt="Teaching Assistant" /> </a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/home']">
-                        <span class='glyphicon glyphicon-home'></span> Home
-                    </a>
-                </li>
                 <li [routerLinkActive]='["link-active"]'>
                     <a [routerLink]="['/subjects']">
                         <span class='glyphicon glyphicon-education'></span> Subjects
+                    </a>
+                </li>
+                <li [routerLinkActive]='["link-active"]'>
+                    <a [routerLink]="['/types']">
+                        <span class='glyphicon glyphicon-blackboard'></span> Assessment Types
+                    </a>
+                </li>
+                <li [routerLinkActive]='["link-active"]'>
+                    <a [routerLink]="['/classes']">
+                        <span class='glyphicon glyphicon-list-alt'></span> Classes
                     </a>
                 </li>
             </ul>

@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TeachingAssistant.Context;
-using TeachingAssistant.Model;
+using TeachingAssistantUltimate.Context;
+using TeachingAssistantUltimate.Model;
 
-namespace TeachingAssistant.Controllers
+namespace TeachingAssistantUltimate.Controllers
 {
     public class SubjectsController : Controller
     {
@@ -22,6 +22,7 @@ namespace TeachingAssistant.Controllers
                 x.SubjectsID,
                 x.Questions.Count,
                 x.Subject,
+                x.SubjectCode,
                 x.Concurrency,
                 Topics = x.Questions.Select(t => t.Topic).Distinct()
             }).SingleOrDefaultAsync(x => x.SubjectsID == id);
@@ -31,11 +32,11 @@ namespace TeachingAssistant.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable> List(string id)
+        public async Task<IEnumerable> List()
         {
             using (var db = new ApplicationDbContext(dco))
             {
-                return await db.Subjects.Select(x => new { x.Concurrency, x.Questions.Count, x.Subject, x.SubjectsID, Topics = x.Questions.Select(t => t.Topic).Distinct().ToList() })
+                return await db.Subjects.Select(x => new { x.Concurrency, x.SubjectCode, x.Questions.Count, x.Subject, x.SubjectsID, Topics = x.Questions.Select(t => t.Topic).Distinct().ToList() })
                     .ToListAsync();
             }
         }
